@@ -7,4 +7,4 @@ const connectDatabase = (uri) => {
     });
 };
 
-module.exports = connectDatabase();
+module.exports = connectDatabase;
