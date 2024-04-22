@@ -12,7 +12,7 @@ process.on("uncaughtException", (err) => {
 const port = process.env.PORT || 4000;
 const mongoURI = process.env.DB_URI || "";
 const nodeEnv = process.env.NODE_ENV || "";
-const cloudinary = process.env.CLOUDINARY_NAME || "";
+const cloudinaryName = process.env.CLOUDINARY_NAME || "";
 const cloudinaryAPI = process.env.CLOUDINARY_API_KEY || "";
 const cloudinarySecret = process.env.CLOUDINARY_API_SECRET || "";
 
@@ -25,7 +25,7 @@ if (nodeEnv !== "PRODUCTION") {
 connectDatabase(mongoURI);
 
 cloudinary.config({
-  cloud_name: cloudinary,
+  cloud_name: cloudinaryName,
   api_key: cloudinaryAPI,
   api_secret: cloudinarySecret,
 });
