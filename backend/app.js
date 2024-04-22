@@ -4,10 +4,11 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middleware/error");
-const path = require("path");
+
+const nodeEnv = process.env.NODE_ENV || "";
 
 // Config
-if (process.env.NODE_ENV !== "PRODUCTION") {
+if (nodeEnv !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
@@ -28,10 +29,10 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use("/uploads",express.static("uploads"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+app.get("/", (req, res) => {
+  res.send("API Working with /api/v1");
 });
 
 

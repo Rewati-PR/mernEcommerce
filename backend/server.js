@@ -9,23 +9,29 @@ process.on("uncaughtException", (err) => {
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
+const port = process.env.PORT || 4000;
+const mongoURI = process.env.DB_URI || "";
+const nodeEnv = process.env.NODE_ENV || "";
+const cloudinary = process.env.CLOUDINARY_NAME || "";
+const cloudinaryAPI = process.env.CLOUDINARY_API_KEY || "";
+const cloudinarySecret = process.env.CLOUDINARY_API_SECRET || "";
 
 // Config
-if (process.env.NODE_ENV !== "PRODUCTION") {
+if (nodeEnv !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
 // Connecting to database
-connectDatabase();
+connectDatabase(mongoURI);
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: cloudinary,
+  api_key: cloudinaryAPI,
+  api_secret: cloudinarySecret,
 });
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`Server is working on http://localhost:${process.env.PORT}`);
+const server = app.listen(port, () => {
+  console.log(`Server is working on http://localhost:${port}`);
 });
 
 //Unhandled Promise Rejection
