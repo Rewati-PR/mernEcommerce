@@ -29,7 +29,7 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
-app.use("/uploads",express.static("uploads"));
+app.use("/",express.static("/build"));
 
 app.get("/", (req, res) => {
   res.send("API Working with /api/v1");
