@@ -10,7 +10,6 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 const port = process.env.PORT || 4000;
-const mongoURI = process.env.DB_URI || "";
 const nodeEnv = process.env.NODE_ENV || "";
 const cloudinaryName = process.env.CLOUDINARY_NAME || "";
 const cloudinaryAPI = process.env.CLOUDINARY_API_KEY || "";
@@ -22,7 +21,7 @@ if (nodeEnv !== "PRODUCTION") {
 }
 
 // Connecting to database
-connectDatabase(mongoURI);
+connectDatabase();
 
 cloudinary.config({
   cloud_name: cloudinaryName,
