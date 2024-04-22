@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server.js",
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "js",
+    "watch": "js -w",
     "dev": "nodemon backend/server.js"
   },
   "author": "",
