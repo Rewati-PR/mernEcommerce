@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
-const connectDatabase = (uri) => {
+export const connectDatabase = (mongoURI) => {
   mongoose
-    .connect(uri).then((data) => {
+    .connect(mongoURI).then((data) => {
       console.log(`Mongodb connected with server: ${data.connection.host}`);
     });
 };
-
-module.exports = connectDatabase();
