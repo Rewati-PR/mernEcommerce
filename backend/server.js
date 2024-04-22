@@ -1,6 +1,6 @@
 const app = require("./app");
 const cloudinary = require("cloudinary");
-const connectDatabase = require("./config/database");
+import { connectDatabase } from "./config/database.js";
 
 
 // Handling Uncaught Exception
@@ -11,6 +11,7 @@ process.on("uncaughtException", (err) => {
 });
 const port = process.env.PORT || 4000;
 const nodeEnv = process.env.NODE_ENV || "";
+const mongoURI = process.env.DB_URI || "";
 const cloudinaryName = process.env.CLOUDINARY_NAME || "";
 const cloudinaryAPI = process.env.CLOUDINARY_API_KEY || "";
 const cloudinarySecret = process.env.CLOUDINARY_API_SECRET || "";
@@ -21,7 +22,7 @@ if (nodeEnv !== "PRODUCTION") {
 }
 
 // Connecting to database
-connectDatabase();
+connectDatabase(mongoURI);
 
 cloudinary.config({
   cloud_name: cloudinaryName,
