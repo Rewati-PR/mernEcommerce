@@ -1,6 +1,6 @@
 const app = require("./app");
 const cloudinary = require("cloudinary");
-const connectDatabase = require("./config/database.js");
+const connectDatabase = require("./config/database");
 
 
 // Handling Uncaught Exception
@@ -9,29 +9,23 @@ process.on("uncaughtException", (err) => {
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
-const port = process.env.PORT || 4000;
-const nodeEnv = process.env.NODE_ENV || "";
-const mongoURI = process.env.DB_URI || "";
-const cloudinaryName = process.env.CLOUDINARY_NAME || "";
-const cloudinaryAPI = process.env.CLOUDINARY_API_KEY || "";
-const cloudinarySecret = process.env.CLOUDINARY_API_SECRET || "";
 
 // Config
-if (nodeEnv !== "PRODUCTION") {
+if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
 // Connecting to database
-connectDatabase(mongoURI);
+connectDatabase();
 
 cloudinary.config({
-  cloud_name: cloudinaryName,
-  api_key: cloudinaryAPI,
-  api_secret: cloudinarySecret,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const server = app.listen(port, () => {
-  console.log(`Server is working on http://localhost:${port}`);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
 
 //Unhandled Promise Rejection
