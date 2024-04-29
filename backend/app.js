@@ -30,7 +30,7 @@ app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
 app.get("*", (req, res) => {
-  res.sendFile("backend/config/database");
+  res.sendFile(path.resolve(__dirname, "./backend/config/database"));
 });
 
 // Middleware for Errors
