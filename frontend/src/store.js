@@ -58,11 +58,17 @@ let initialState = {
       : {},
   },
 };
+let devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+if (process.env.NODE_ENV === 'PROD' || process.env.NODE_ENV === 'PRODUCTION') {
+  devTools = a => a;
+}
+const middleware = [thunk];
 
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(...middleware),devTools)
 );
 
 export default store;
