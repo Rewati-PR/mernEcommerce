@@ -24,14 +24,14 @@ const user = require("./routes/userRoute");
 const order = require("./routes/orderRoute");
 const payment = require("./routes/paymentRoute");
 
-app.use("/api/v1", product);
-app.use("/api/v1", user);
-app.use("/api/v1", order);
-app.use("/api/v1", payment);
+app.use(`${process.env.REACT_APP_API}`, product);
+app.use(`${process.env.REACT_APP_API}`, user);
+app.use(`${process.env.REACT_APP_API}`, order);
+app.use(`${process.env.REACT_APP_API}`, payment);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
 
