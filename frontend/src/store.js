@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+
 import {
   newProductReducer,
   newReviewReducer,
@@ -58,17 +58,13 @@ let initialState = {
       : {},
   },
 };
-let devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-if (process.env.NODE_ENV === 'PROD' || process.env.NODE_ENV === 'PRODUCTION') {
-  devTools = a => a;
-}
 const middleware = [thunk];
 
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware),devTools)
+  compose(applyMiddleware(...middleware))
 );
 
 export default store;
