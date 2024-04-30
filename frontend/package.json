@@ -58,7 +58,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.43.65:4000",
+  "proxy": "https://mernecommerce-290424.onrender.com",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
